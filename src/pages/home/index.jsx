@@ -1,7 +1,7 @@
 import api from "../../services/api"
 import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-
+import './home.css'
 
 
 function Home() {
@@ -22,13 +22,13 @@ function Home() {
 
   return (
     <div>
-      <div className="lista">
+      <div className="container">
         {filmes.map((filme) => {
           return (
             <article key={filme.id}>
               <strong>{filme.titulo}</strong>
               <img src={filme.url_img} alt={filme.titulo}/>
-              
+              <Link to={`/filme/${filme.id}`}>Acessar</Link>
             </article>
           )
         })}
