@@ -1,6 +1,8 @@
+import './footer.css'
+
 export default function Footer(){
     return(
-        <footer>
+        <footer className='footer-fixo'>
             <p>Shay</p>
         </footer>
     )
