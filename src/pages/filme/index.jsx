@@ -20,7 +20,34 @@ function Filme() {
     carregaFilme()
   }, [])
 
+  function salvarFilme(){
+    const minhaLista = localStorage.getItem("@filme")//obtem os filmes que estão salvos no localStorage
 
+    let filmesSalvos = []//armazenar filmes salvos
+
+    if(minhaLista){
+      //verifica se a lista existe
+      try{//caso sucesso
+        filmesSalvos = JSON.parse(minhaLista)
+      }
+      catch (error){//caso erro
+        console.error("Erro ao fazer o parse da lista de filmes: ", error)
+      }
+    }
+
+    const temFilme = filmesSalvos.some((filmeSalvo)=>filmeSalvo.id === filme.id)
+
+        if(temFilme){
+          alert("Esse filme já está na sua lista!")
+          return
+        }
+
+        filmesSalvos.push(filme)//add o filme na lista de filmes salvos.
+        localStorage.setItem("@filme", JSON.stringify(filmesSalvos))
+        alert("Filme Salvo!")
+      }
+
+  
 
 
 
@@ -33,8 +60,8 @@ function Filme() {
       <p>{filme.sinopse}</p>
 
       <div className='area-buttons'>
-        <button>Salvar</button>
-        <button><a>Trailer</a></button>
+        <button onClick={salvarFilme}>Salvar</button>
+        <button><a href={`https://www.youtube.com/results?search_query=${filme.titulo} Trailer`} target="_blank">Trailer</a></button>
       </div>
 
     </div>
